@@ -1,0 +1,66 @@
+// Schema inicial do Prisma para o case
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Client {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  age       Int
+  status    Boolean
+  familyProfile String
+  goals     Goal[]
+  wallet    Wallet?
+  events    Event[]
+  simulations Simulation[]
+  insurances Insurance[]
+}
+
+model Goal {
+  id        Int      @id @default(autoincrement())
+  clientId  Int
+  type      String
+  targetValue Float
+  targetDate DateTime
+  client    Client   @relation(fields: [clientId], references: [id])
+}
+
+model Wallet {
+  id        Int      @id @default(autoincrement())
+  clientId  Int      @unique
+  total     Float
+  classes   Json
+  client    Client   @relation(fields: [clientId], references: [id])
+}
+
+model Event {
+  id        Int      @id @default(autoincrement())
+  clientId  Int
+  type      String
+  value     Float
+  frequency String
+  client    Client   @relation(fields: [clientId], references: [id])
+}
+
+model Simulation {
+  id        Int      @id @default(autoincrement())
+  clientId  Int
+  createdAt DateTime @default(now())
+  data      Json
+  client    Client   @relation(fields: [clientId], references: [id])
+}
+
+model Insurance {
+  id        Int      @id @default(autoincrement())
+  clientId  Int
+  type      String
+  value     Float
+  client    Client   @relation(fields: [clientId], references: [id])
+}

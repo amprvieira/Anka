@@ -1,0 +1,50 @@
+# Node
+node_modules/
+dist/
+build/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Prisma
+prisma/dev.db
+prisma/migrations/
+
+# VSCode
+.vscode/
+
+# Docker
+*.pid
+docker-data/
+
+# GitHub
+.github/
+
+# Coverage
+coverage/
+
+# Jest
+jest-test-results.json
+
+# Others
+*.sqlite
+*.tgz
+*.tar.gz
+*.zip
+*.bak
+*.tmp
+
+# Ignore generated files
+*.generated.*
